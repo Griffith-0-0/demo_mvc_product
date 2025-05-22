@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Saisie des produits</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="">
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <form th:action="@{/admin/saveProduit}" th:object="${product}" method="post">
+            <div class="mb-3">
+                <label class="form-label">Nom produit</label>
+                <input type="text" th:field="*{name}" class="form-control" />
+                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Prix</label>
+                <input type="text" th:field="*{price}" class="form-control" />
+                <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="text-danger"></div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Quantité</label>
+                <input type="text" th:field="*{quantity}" class="form-control" />
+                <div th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" class="text-danger"></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

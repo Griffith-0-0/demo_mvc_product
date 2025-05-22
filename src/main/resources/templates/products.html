@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"  xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Products</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.5/css/bootstrap.min.css">
+</head>
+<body>
+<div layout:fragment="content">
+    <div>
+        <form action="/user/index" method="get">
+            <label>Mot clé</label>
+            <input type="text" name="mc" th:value="${mc}"/>
+            <input type="submit" value="Chercher" />
+        </form>
+    </div>
+    <a class="btn btn-primary" th:href="@{/admin/form}">Ajouter</a>
+    <div class="p-3">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th><th>Name</th><th>Price</th><th>Quantity</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:each="p:${listProduits}">
+                    <th th:text="${p.id}"></th>
+                    <th th:text="${p.name}"></th>
+                    <th th:text="${p.price}"></th>
+                    <th th:text="${p.quantity}"></th>
+                    <td>
+                        <a class="btn btn-primary" th:href="@{/admin/formModifier(id=${p.id})}">Modifier</a>
+                    </td>
+                    <td sec:authroize="hasRole('ADMIN')">
+                        <a onclick="return confirm('etes vous sure?')" class="btn btn-danger" th:href="@{/admin/deleteProduct(id=${p.id})}">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container mt-4">
+        <ul class="nav nav-pills">
+            <li class="nav-item" th:each="p : ${pages}"
+                th:classappend="${pageCourante == p} ? 'active' : ''">
+                <a class="nav-link" th:href="@{/user/index(page=${p},size=${size}, mc=${mc})}"
+                   th:text="${p}"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

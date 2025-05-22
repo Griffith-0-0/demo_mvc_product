@@ -1,0 +1,4 @@
+# creer des package pour les entites, repository qui erite de JPA repos
+# dans fichier runnibale creer un bean java, comandelinrunner (un executable pour tester au demarage)
+# configurer la base de donnees dans app prorieties
+# ajouter verssion lambok

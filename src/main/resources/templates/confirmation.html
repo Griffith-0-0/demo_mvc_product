@@ -1,0 +1,44 @@
+<!-- src/main/resources/templates/confirmation.html -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirmation</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <div class="container mt-4">
+    <div class="card">
+      <div class="card-header">
+        Confirmation
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label class="form-label fw-bold">Nom :</label>
+          <span th:text="${product.name}">Nom</span>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold">Quantité :</label>
+          <span th:text="${product.quantity}">Quantité</span>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold">Prix :</label>
+          <span th:text="${product.price}">Prix</span>
+        </div>
+      </div>
+    </div>
+    <form th:action="@{/admin/confim}" method="post" th:object="${product}">
+      <input type="hidden" th:field="*{id}" />
+      <input type="hidden" th:field="*{name}" />
+      <input type="hidden" th:field="*{quantity}" />
+      <input type="hidden" th:field="*{price}" />
+      <button type="submit" class="btn btn-primary mt-3">Confirmer</button>
+    </form>
+
+  </div>
+</div>
+</body>
+</html>
